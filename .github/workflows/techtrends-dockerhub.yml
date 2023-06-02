@@ -22,7 +22,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v2
         with:
-          context: ./project/techtrends/
+          context: ./project/techtrends
           file: ./Dockerfile
           push: true
           tags: lexarflash8g/techtrends:latest
