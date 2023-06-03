@@ -23,6 +23,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./project/techtrends
-          file: ./Dockerfile
+          file: ./project/techtrends/Dockerfile
           push: true
           tags: lexarflash8g/techtrends:latest
