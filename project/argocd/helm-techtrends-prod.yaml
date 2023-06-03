@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: techtrends-prod
+  namespace: argocd
+spec:
+  destination:
+    namespace: production
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      values: |
+        namespace: prod
+        service:
+          port: 7111
+        image:
+          pullPolicy: Always
+        replicaCount: 5
+        resources:
+          requests:
+            memory: 128Mi
+            cpu: 350m
+          limits:
+            memory: 256Mi
+            cpu: 500m
+# Reference the content of the values-prod.yaml file here
+    path: project/helm/templates
+    repoURL: https://github.com/lexarflash8g/nd064_course_1
+    targetRevision: HEAD
+  syncPolicy:
+    automated: {}

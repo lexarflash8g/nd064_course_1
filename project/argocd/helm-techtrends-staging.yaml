@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: techtrends-staging
+  namespace: argocd
+spec:
+  destination:
+    namespace: staging
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      values: |
+        namespace: staging
+        service:
+          port: 5111
+        replicaCount: 3
+        resources:
+          requests:
+            memory: 90Mi
+            cpu: 300m
+          limits:
+            memory: 128Mi
+            cpu: 500m
+
+        # Reference the content of the values-staging.yaml file here
+    path: project/helm/templates
+    repoURL: https://github.com/lexarflash8g/nd064_course_1
+    targetRevision: HEAD
+  syncPolicy:
+    automated: {}
